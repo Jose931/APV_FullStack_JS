@@ -25,6 +25,8 @@ const registrar = async (req, res) => {
     
 };
 
+
+
 const perfil = (req, res) => {
     res.json({msg: 'Mostrando perfil'});
 };
@@ -47,14 +49,27 @@ const confirmar = async (req, res) => {
         res.json({msg: "Usuario confirmado correctamente. "});
     } catch (error) {
         console.log(error);
-    }
+    } 
+};
 
-    
+const autenticar = async (req, res) => {
+    const {email} = req.body;
+
+    //Comprobar si usuario existe
+    const usuario = await Veterinario.findOne({email});
+
+    if(usuario) {
+        res.json({msq: 'Autenticando...'});
+    }else {
+        const error = new Error('El usuairo no existe');
+        res.status(404).json(error.message);
+    }  
 };
 
 
 export {
     registrar,
     perfil,
-    confirmar
+    confirmar,
+    autenticar
 }
