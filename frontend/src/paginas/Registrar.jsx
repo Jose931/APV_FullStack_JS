@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
+import axios from "axios";
 import Alerta from "../components/Alerta.jsx";
 
 const Registrar = () => {
@@ -10,7 +11,7 @@ const Registrar = () => {
   const [repetirPassword, setRepetirPassword] = useState('');
   const [alerta, setAlerta] = useState('');
 
-  const handleSubmit = e=> {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if([nombre, email, password, repetirPassword].includes('')){
@@ -27,6 +28,22 @@ const Registrar = () => {
       setAlerta({msg: 'La contraseña es muy corta, mínimo 6 caracteres', error: true});
     }
     setAlerta({});
+
+    //Crear el usuario en la api
+    try {
+      const url = "http://localhost:4000/api/veterinarios";
+      const respuesta = await axios.post(url, {nombre, email, password});
+
+      setAlerta({
+        msg: 'Creado correctamente. revisa tu email para confirmar la cuenta',
+        error: false
+      })
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true
+      })
+    }
   }
 
   const {msg} = alerta;
