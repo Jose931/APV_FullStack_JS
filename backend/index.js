@@ -15,6 +15,7 @@ dotenv.config();
 connectDB();
 
 const dominiosPermitidos = ['http://localhost:5173'];
+
 const corsOptions = {
     origin: function(origin, callback) {
         if(dominiosPermitidos.indexOf(origin) !== -1) {

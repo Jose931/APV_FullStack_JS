@@ -7,6 +7,8 @@ import ConfirmarCuenta from "./paginas/ConfirmarCuenta.jsx";
 
 function App() {
 
+  
+
   return (
     <BrowserRouter>
       <Routes>
