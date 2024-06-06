@@ -1,12 +1,15 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import AuthLayout from "./layout/AuthLayout.jsx";
+import RutaProtegida from "./layout/RutaProtegida.jsx";
 import Login from "./paginas/Login.jsx";
 import Registrar from "./paginas/Registrar.jsx";
 import OlvidePassword from "./paginas/OlvidePassword.jsx";
 import ConfirmarCuenta from "./paginas/ConfirmarCuenta.jsx";
 import NuevoPassword from "./paginas/NuevoPassword.jsx";
+import AdministrarPacientes from "./paginas/AdministrarPacientes.jsx";
 
 import { AuthProvider } from "./context/AuthProvider.jsx";
+
 
 function App() {
 
@@ -22,6 +25,10 @@ function App() {
               <Route path="olvide-password" element={<OlvidePassword />} />
               <Route path="olvide-password/:token" element={<NuevoPassword />} />
               <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+            </Route>
+
+            <Route path="/admin" element={<RutaProtegida />} >
+              <Route index  element={<AdministrarPacientes />} />
             </Route>
           </Routes>
       </AuthProvider>
