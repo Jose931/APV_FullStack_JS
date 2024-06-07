@@ -1,5 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth.jsx";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
 
 const RutaProtegida = () => {
 const { auth, cargando } = useAuth();
@@ -13,8 +15,14 @@ if(cargando) {
 
   return (
     <>
-        <h1>Esta es una ruta protegida</h1>
-        {auth?._id ? <Outlet /> : <Navigate to="/" />}
+        <Header />
+          {
+          auth?._id ? (
+            <main className="container mx-auto mt-10">
+              <Outlet />
+            </main>
+          ): <Navigate to="/" />}
+        <Footer />
    </>
   )
 }

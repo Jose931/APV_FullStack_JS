@@ -38,7 +38,12 @@ const AuthProvider = ({children}) => {
         setCargando(false);
       }
       autenticarUsuario();
-    }, [])
+    }, []);
+
+    const cerrarSesion = () => {
+        localStorage.removeItem('token');
+        setAuth({});
+    }
     
 
     return (
@@ -46,7 +51,8 @@ const AuthProvider = ({children}) => {
             value={{
                 auth,
                 setAuth,
-                cargando
+                cargando,
+                cerrarSesion
             }}
         >
             {children}
