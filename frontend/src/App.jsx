@@ -8,6 +8,7 @@ import ConfirmarCuenta from "./paginas/ConfirmarCuenta.jsx";
 import NuevoPassword from "./paginas/NuevoPassword.jsx";
 import AdministrarPacientes from "./paginas/AdministrarPacientes.jsx";
 
+import { PacientesProvider } from "./context/PacientesProvider.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 
 
@@ -18,6 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <PacientesProvider>
           <Routes>
             <Route path="/" element={<AuthLayout />}>
               <Route index element={<Login />} />
@@ -31,6 +33,7 @@ function App() {
               <Route index  element={<AdministrarPacientes />} />
             </Route>
           </Routes>
+        </PacientesProvider>
       </AuthProvider>
     </BrowserRouter>
   )

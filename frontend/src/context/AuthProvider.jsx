@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext } from "react";
-import { useLocation } from "react-router-dom";
 import clienteAxios from "../config/axios.jsx";
 
 const AuthContext = createContext();
