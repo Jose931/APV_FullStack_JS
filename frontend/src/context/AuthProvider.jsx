@@ -26,7 +26,6 @@ const AuthProvider = ({children}) => {
 
         try {
             const { data } = await clienteAxios('/veterinarios/perfil', config);
-            console.log(data);
 
             setAuth(data);
         } catch (error) {
