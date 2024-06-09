@@ -1,9 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 import clienteAxios from "../config/axios.jsx";
+import useAuth from "../hooks/useAuth.jsx";
 
 const PacientesContext = createContext();
 
 export const PacientesProvider = ({ children }) => {
+  const { auth } = useAuth(); 
+
   const [pacientes, setPacientes] = useState([]);
   const [paciente, setPaciente] = useState({});
 
@@ -28,7 +31,7 @@ export const PacientesProvider = ({ children }) => {
     };
 
     obtenerPacientes();
-  }, []);
+  }, [auth]);
 
   const guardarPaciente = async (paciente) => {
     const token = localStorage.getItem("token");
@@ -99,6 +102,10 @@ export const PacientesProvider = ({ children }) => {
     }
   };
 
+  const limpiarSesion = () => {
+    setPacientes({});
+  };
+
   return (
     <PacientesContext.Provider
       value={{
@@ -107,6 +114,7 @@ export const PacientesProvider = ({ children }) => {
         setEdicion,
         paciente,
         eliminarPaciente,
+        limpiarSesion
       }}
     >
       {children}

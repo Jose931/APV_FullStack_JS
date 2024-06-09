@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth.jsx";
+import usePacientes from "../hooks/usePacientes.jsx";
 
 const Header = () => {
 
     const { cerrarSesion } = useAuth();
+    const { limpiarSesion } = usePacientes();
 
   return (
     <header className="py-10 bg-indigo-600">
@@ -18,7 +20,7 @@ const Header = () => {
                 <button
                 type="button"
                 className="text-white text-sm uppercase font-bold"
-                onClick={cerrarSesion}
+                onClick={() => {limpiarSesion(); cerrarSesion()}}
                 >
                     Cerrar Sesión
                 </button>
