@@ -13,7 +13,7 @@ const EditarPerfil = () => {
     setPerfil(auth);
   }, [auth]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { nombre, email } = perfil;
@@ -26,7 +26,8 @@ const EditarPerfil = () => {
       return;
     }
 
-    actualizarPerfil(perfil);
+    const resultado = await actualizarPerfil(perfil);
+    setAlerta(resultado);
   };
 
   const { msg } = alerta;
@@ -42,6 +43,10 @@ const EditarPerfil = () => {
 
       <div className="flex justify-center">
         <div className="w-full md:w-1/2 bg-white shadow-lg rounded-lg p-5">
+        { msg &&  <Alerta 
+            alerta={alerta}
+          />
+        }
           <form onSubmit={handleSubmit}>
             <div className="my-3">
               <label className="uppercase font-bold text-gray-600">
